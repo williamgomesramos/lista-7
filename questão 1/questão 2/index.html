@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+
+    <form action="">
+        <label for="idNotas">Insira as Notas dos Alunos:</label><br>
+        <input type="number" id="idNotas">
+        <br><br>
+
+        <button type="button" onclick="registrar()" id="idRegistrar"> Registrar no Sistema </button>
+        <br><br>
+        <button type="button" onclick="mostrarResultado()">Mostrar Resultados</button>
+        <br><br>
+
+        <output id="idOutMedia"></output><br><br>
+        <output id="idOutAcimaDaMedia"></output><br><br>
+        <output id="idOutMaiorNota"></output><br><br>
+
+    </form>
+    <script>
+        var notas = []
+        var outMedia = document.querySelector("#idOutMedia")
+        var outAcimaDaMedia = document.querySelector("#idOutAcimaDaMedia")
+        var outMaiorNota = document.querySelector("#idOutMaiorNota") 
+        var soma = 0       
+
+        function registrar() {
+            let nota = Number(document.querySelector("#idNotas").value)
+            soma = soma + Number(document.querySelector("#idNotas").value)
+            notas.push(nota)
+            document.querySelector("#idNotas").value  = ""
+        }
+
+        function mostrarResultado() {
+            let media = soma / notas.length                
+            let contaAcimaMedia = 0
+            let maiorNota = 0
+            outMedia.value = "A média da turma é: " + media
+
+            for (let i = 0; i < notas.length; i++) {
+                if (notas[i] > media) {
+                   contaAcimaMedia++
+                }
+                outAcimaDaMedia.value = "Há " + contaAcimaMedia + " alunos acima da média!"   
+
+                if (maiorNota < notas[i]) {
+                    maiorNota = notas[i]
+                    let posicaoMaiorNota = i
+                    outMaiorNota.value = "Maior Nota: " + maiorNota + " - Na posição: " + posicaoMaiorNota
+                }
+            }    
+            console.log(notas);            
+        }
+    </script>
+</body>
+</html>

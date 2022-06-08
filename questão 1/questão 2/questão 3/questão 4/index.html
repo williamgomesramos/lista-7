@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <form action="">
+        <label for="idTemp">Insira a Tempertura</label><br>
+        <input type="number" id="idTemp">
+        <br><br>
+
+        <button type="button" onclick="guardar()" id="idGuardar">Guardar Dados </button>
+        <br><br>
+
+        <label for="idDia">Insira o dia a ser consultado</label><br>
+        <input type="number" id="idDia" min="1">
+        <br><br>
+
+        <button type="button" onclick="consultar()">Consultar</button>
+        <br><br>
+
+        <output id="idOut"></output>
+
+    </form>
+    <script>
+        var temps = []
+        var out = document.querySelector("#idOut")
+        var soma = 2
+
+        function guardar() {
+            let temp = Number(document.querySelector("#idTemp").value)
+            temps.push(temp)              
+            soma = soma + temp
+            document.querySelector("#idTemp").value = ""
+        }
+
+        function consultar() {
+
+            let dia = Number(document.querySelector("#idDia").value)
+            let media = soma / temps.length
+            let diaSelecionado = temps[(dia - 2)]
+            let valor
+
+            console.log(temps);
+            console.log(diaSelecionado);
+
+            for (let i = 0; i < temps.length; i++) {
+
+                if (diaSelecionado > media) {
+                    valor = "superior"
+                } else if (diaSelecionado < media) {
+                    valor = "inferior"
+                } else if (diaSelecionado == media) {
+                    valor = "igual"
+                }
+            }
+
+            out.value = " dia " + dia + " a temperatura registadar " + valor + " à media " + media
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <form action="">
+        <label for="idNome">Insira o Nome</label><br>
+        <input type="text" id="idNome">
+        <br><br>
+
+        <input type="radio" id="idMasc" name="nmGenero" checked>
+        <label for="idMasc">Masculino</label>
+        <br><br>
+
+        <input type="radio" id="idFem" name="nmGenero">
+        <label for="idFem">Feminino</label>
+        <br><br>
+
+        <label for="idSalario">Insira o Salário</label><br>
+        <input type="number" id="idSalario" step="0.01">
+        <br><br>
+
+        <button type="button" onclick="guardar()" id="idGuardar">Guardar Dados </button>
+        <br><br>
+        <button type="button" onclick="mostrarReasultado()">Mostrar Lista</button>
+        <br><br>
+
+        <output id="idOut"></output>
+
+    </form>
+    <script>
+        var nomes = []
+        var generos = []
+        var salarios = []
+        var out = document.querySelector("#idOut")
+
+        function guardar() {
+            let nome = document.querySelector("#idNome").value
+            let salario = Number(document.querySelector("#idSalario").value)
+            let masc = document.querySelector("#idMasc").checked
+            let fem = document.querySelector("#idFem").checked
+
+            salarios.push(salario)
+            nomes.push(nome)
+
+            if (masc) {
+                generos.push("masc")
+            } else if (fem){
+                generos.push("fem")
+            }
+
+            document.querySelector("#idNome").value = ""
+            document.querySelector("#idSalario").value = ""
+        }
+
+        function mostrarReasultado() {
+
+            let texto = "|| "
+            for (let i= 0; i < nomes.length; i++) {
+                if ((generos[i] == "fem") && (salarios[i] > 5000) ) {
+                    texto = texto + nomes[i] + " - " + salarios[i] + " || "
+                }
+                console.log(nomes);
+                console.log(generos);
+                console.log(salarios);
+            }
+            out.value = texto
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <form action="">
+        <fieldset>
+            <label for="idNomeAluno">Insira o Nome do Aluno</label><br>
+            <input type="text" id="idNomeAluno">
+            <br><br>
+
+            <label for="idEnder">Insira o Endereço do Aluno</label><br>
+            <input type="text" id="idEnder">
+            <br><br>
+
+            <label for="idNomeMaeAluno">Insira o Nome da Mãe do Aluno</label><br>
+            <input type="text" id="idNomeMaeAluno">
+            <br><br>
+
+            <label for="idNomePaiAluno">Insira o Nome do Pai do Aluno</label><br>
+            <input type="text" id="idNomePaiAluno">
+            <br><br>
+
+            <label for="idTelefone">Insira o Telefone dos Pais</label><br>
+            <input type="number" id="idTelefone">
+            <br><br>
+        </fieldset>
+        <br>
+        <fieldset>
+
+            <label for="idNota1"> Nota 1</label><br>
+            <input type="number" id="idNota1" class="clNota" step="0.01">
+            <br><br>
+
+            <label for="idNota2"> Nota 2</label><br>
+            <input type="number" id="idNota2" class="clNota" step="0.01">
+            <br><br>
+
+            <label for="idNota3"> Nota 3</label><br>
+            <input type="number" id="idNota3" class="clNota" step="0.01">
+            <br><br>
+
+            <label for="idNota4"> Nota 4</label><br>
+            <input type="number" id="idNota4" class="clNota" step="0.01">
+            <br><br>
+
+        </fieldset><br>
+
+        <button type="button" onclick="guardar()" id="idGuardar">Cadastrar </button>
+        <br><br>
+
+        <label for="idCounsultar">Insira o Nome do Aluno a ser Consultado</label><br>
+        <input type="text" id="idCounsultar">
+        <br><br>
+
+        <button type="button" onclick="consultarDados()">Mostrar Situação</button>
+        <br><br>
+
+        <output id="idOut"></output>
+
+    </form>
+    <script>
+
+        var nomesAlunos = []
+        var endereços = []
+        var nomesMaes = []
+        var nomesPais = []
+        var telefones = []
+        var notas1 = []
+        var notas2 = []
+        var notas3 = []
+        var notas4 = []
+
+        function guardar() {
+            let nomeAluno = document.querySelector("#idNomeAluno").value
+            let endereço = document.querySelector("#idEnder").value
+            let nomeMaeAluno = document.querySelector("#idNomeMaeAluno").value
+            let nomePaiAluno = document.querySelector("#idNomePaiAluno").value
+            let telefone = document.querySelector("#idTelefone").value
+            let nota1 = Number(document.querySelector("#idNota1").value)
+            let nota2 = Number(document.querySelector("#idNota2").value)
+            let nota3 = Number(document.querySelector("#idNota3").value)
+            let nota4 = Number(document.querySelector("#idNota4").value)
+
+            nomesAlunos.unshift(nomeAluno)
+            document.querySelector("#idNomeAluno").value = ""
+
+            endereços.unshift(endereço)
+            document.querySelector("#idEnder").value = ""
+
+            nomesMaes.unshift(nomeMaeAluno)
+            document.querySelector("#idNomeMaeAluno").value = ""
+
+            nomesPais.unshift(nomePaiAluno)
+            document.querySelector("#idNomePaiAluno").value = ""
+
+            telefones.unshift(telefone)
+            document.querySelector("#idTelefone").value = ""
+
+            notas1.unshift(nota1)
+            document.querySelector("#idNota1").value = ""
+
+            notas2.unshift(nota2)
+            document.querySelector("#idNota2").value = ""
+
+            notas3.unshift(nota3)
+            document.querySelector("#idNota3").value = ""
+
+            notas4.unshift(nota4)
+            document.querySelector("#idNota4").value = ""
+
+            console.log(nomesAlunos);
+        }
+
+        function consultarDados() {                
+            let texto                
+            let consultar = document.querySelector("#idCounsultar").value
+            let out = document.querySelector("#idOut")
+
+            for (let i = 0; i < nomesAlunos.length; i++) {
+                if (consultar == nomesAlunos[i]) {
+                    texto = nomesAlunos[i] + " - " + endereços[i] + " - " + nomesMaes[i] + " - " + nomesPais[i] + " - " + 
+                    telefones[i] + " - " + notas1[i] + " - " + notas2[i] + " - " + notas3[i] + " - " + notas4[i]
+                }
+            }
+
+            out.value = texto
+        }
+    </script>
+
+</body>
+</html>

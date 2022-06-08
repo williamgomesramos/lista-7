@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <label for="idNumero">Numero</label><br>
+        <input type="text" id="idNumero">
+
+        <br><br>
+        <input type="button" value="Enviar" onclick="enviarNumero()">
+
+
+        <br><br>
+        <output id="idOutVetor"></output>
+
+        <br><br>
+        <output id="idOutMultiplos"></output>
+    </form>       
+    <script>
+        var outVetor = document.getElementById("idOutVetor")
+        var outMultiplos = document.getElementById("idOutMultiplos")
+        var vetorNumeros = []
+        var numPares = []
+        var cont = 0
+        var contPosicao = -1
+
+        function enviarNumero() {
+            contPosicao++
+            cont++
+            let numero = document.getElementById("idNumero").value
+            let numerosEnviados = " " + numero
+
+            if (numerosEnviados % 2 == 0) {
+                numPares.push(contPosicao)
+            }
+
+            vetorNumeros.push(numerosEnviados)
+
+            document.getElementById("idNumero").value = ""
+
+            if (cont == 10) {
+                document.getElementById("idNumero").disabled = true
+                console.table(vetorNumeros)
+                console.table(numPares)
+                outVetor.value = vetorNumeros
+                outMultiplos.value = "Os numeros pares estão nas posições: " + numPares
+            }
+        } 
+    </script>
+</body>
+</html>

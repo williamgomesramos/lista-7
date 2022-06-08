@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <form action="">
+        <label for="idNum">Insira o Número</label><br>
+        <input type="number" id="idNum">
+        <br><br>
+
+        <button type="button" onclick="guardar()" id="idGuardar">Guardar Número </button>
+        <br><br>
+
+        <input type="radio" id="idCre" name="nmOrdem" checked>
+        <label for="idCre">Crescente</label>
+        <br><br>
+
+        <input type="radio" id="idDecre" name="nmOrdem">
+        <label for="idDecre">Decrescente</label>
+        <br><br>
+
+        <button type="button" onclick="ordenar()">Ordenar</button>
+        <br><br>
+
+        <output id="idOut"></output>
+
+    </form>
+    <script>
+        var nums = []
+        var out = document.querySelector("#idOut")
+
+
+        function guardar() {
+            let num = Number(document.querySelector("#idNum").value)
+            nums.push(num)              
+            document.querySelector("#idNum").value = ""
+            console.log(nums);
+        }
+
+        function ordenar() {
+            let crescente = document.querySelector("#idCre").checked
+            let decrescente = document.querySelector("#idDecre").checked
+            let placeHolder = 0
+
+            for (let i = 1; i < nums.length; i++) { // num analisado
+                for (let index = 0; index < nums.length; index++) { // num comparado
+
+                    if (nums[i] < nums[index] && crescente == true) {
+                        placeHolder = nums[i]
+                        nums.splice(i, 1)
+                        nums.splice(index, 0, placeHolder)
+                        index = nums.length
+                    }
+                    if (nums[i] > nums[index] && decrescente == true) {
+                        placeHolder = nums[i]
+                        nums.splice(i, 1)
+                        nums.splice(index, 0, placeHolder)
+                        index = nums.length
+                    }
+                }  
+            }                
+            out.value = nums.toString()
+        }
+    </script>
+</body>
+</html>   

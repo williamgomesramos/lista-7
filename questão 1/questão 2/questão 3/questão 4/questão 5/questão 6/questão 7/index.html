@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <form action="">
+        <button type="button" onclick="sortear()">Sortear</button>
+        <br><br>
+
+        <label for="idJog1">Jogador 1</label><br>
+        <input type="text" id="idJog1" class="clChute">
+        <br><br>
+
+        <label for="idJog2">Jogador 2</label><br>
+        <input type="text" id="idJog2" class="clChute">
+        <br><br>
+
+        <label for="idJog3">Jogador 3</label><br>
+        <input type="text" id="idJog3" class="clChute">
+        <br><br>
+
+        <label for="idJog4">Jogador 4</label><br>
+        <input type="text" id="idJog4" class="clChute">
+        <br><br>
+
+        <output id="idOut"></output>
+        <br><br>
+
+        <button type="button" onclick="responder()">Responder</button>
+        <br><br>
+
+        <button type="button" onclick="finalizarJogo()">Finalizar Jogo</button>
+        <br><br>
+
+        <output id="idOutFim"></output>
+    </form>
+    <script>
+        var estados = ["Acre", "Alagoas", "Amapá", "Amazonas", "Bahia", "Ceará", "Distrito Federal", 
+        "Espírito Santo", "Goiás", "Maranhão", "Mato Grosso", "Mato Grosso do Sul", "Minas Gerais", 
+        "Pará", "Paraíba", "Paraná", "Pernambuco", "Piauí", "Rio de Janeiro", "Rio Grande do Norte", "Rio Grande do Sul", 
+        "Rondônia", "Roraima", "Santa Catarina", "São Paulo", "Sergipe", "Tocantins"]
+
+        var capitais = ["Rio Branco", "Maceió", "Macapá", "Manaus", "Salvador", "Fortaleza", "Brasília", "Vitória", 
+        "Goiânia", "São Luiz", "Cuiabá", "Campo Grande", "Belo Horizonte", "Belém", "João Pessoa", "Curitiba", "Recife", 
+        "Terezina", "Rio de Janeiro", "Natal", "Porto Alegre", "Porto Velho", "Boa Vista", "Florianópolis", "São Paulo", 
+        "Aracajú", "Palmas", ]
+
+        var out = document.querySelector("#idOut")
+        var outFim = document.querySelector("#idOutFim")
+        var contRodadas = 0
+        var sorteio
+        var vezJog
+
+        function sortear() {
+            sorteio = parseInt(Math.random() * 27)
+            let estado = estados[sorteio]
+
+            out.value = "Qual é a capital de " + estado + " ?"
+
+            vezJog = contRodadas % 4
+
+            if (vezJog == 0) {
+                document.querySelector("#idJog1").disabled = false
+                document.querySelector("#idJog2").disabled = true
+                document.querySelector("#idJog3").disabled = true
+                document.querySelector("#idJog4").disabled = true
+
+            } else if (vezJog == 1) {
+                document.querySelector("#idJog1").disabled = true
+                document.querySelector("#idJog2").disabled = false
+                document.querySelector("#idJog3").disabled = true
+                document.querySelector("#idJog4").disabled = true
+
+            } else if (vezJog == 2) {
+                document.querySelector("#idJog1").disabled = true
+                document.querySelector("#idJog2").disabled = true
+                document.querySelector("#idJog3").disabled = false
+                document.querySelector("#idJog4").disabled = true
+
+            } else if (vezJog == 3) {
+                document.querySelector("#idJog1").disabled = true
+                document.querySelector("#idJog2").disabled = true
+                document.querySelector("#idJog3").disabled = true
+                document.querySelector("#idJog4").disabled = false
+
+            }
+            contRodadas++
+        
+        }
+
+        function responder() {
+            let chute = document.querySelectorAll(".clChute").value
+            let pontoJog1 = 1
+            let pontoJog2 = 2
+            let pontoJog3 = 0
+            let pontoJog4 = 3
+            let capital = capitais[sorteio]
+           
+            pontuações = [pontoJog1, pontoJog2, pontoJog3, pontoJog4]
+
+            if (chute == capital) {
+                if (vezJog == 0) {
+                    pontoJog1++
+                    alert("Jogador 1 Acertou!")
+                }
+                if (vezJog == 1) {
+                    pontoJog2++
+                    alert("Jogador 2 Acertou!")                    
+                }
+                if (vezJog == 2) {
+                    pontoJog3++
+                    alert("Jogador 3 Acertou!")
+                }
+                if (vezJog == 3) {
+                    pontoJog4++
+                    alert("Jogador 4 Acertou!")
+                }
+            }else{
+                alert("Resposta Incorreta!")
+            }
+            document.querySelector("#idJog1").value = ""
+            document.querySelector("#idJog2").value = ""
+            document.querySelector("#idJog3").value = ""
+            document.querySelector("#idJog4").value = ""
+            sortear()
+
+           
+        }
+
+        function finalizarJogo() {
+            let placeHolder = 0
+            for (let i = 0; i < pontuações.length; i++) { // num analisado
+                for (let index = 0; index < pontuações.length; index++) { // num comparado
+
+                    placeHolder = pontuações[i]
+                    pontuações.splice(i, 1)
+                    pontuações.splice(index, 0, placeHolder)
+                    index = pontuações.length
+                }
+            }
+            console.log(pontuações);
+            outFim.value = pontuações  
+        }        
+    </script>
+
+</body>
+</html> 
